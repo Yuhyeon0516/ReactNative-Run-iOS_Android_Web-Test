@@ -1,79 +1,121 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Intro
 
-# Getting Started
+After looking at the reference materials below, I tested the construction of an environment that develops iOS, Android and Web simultaneously using react-native-cli.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+Reference : https://retool.com/blog/how-to-make-your-react-native-apps-work-on-the-web/
 
-## Step 1: Start the Metro Server
+# How?
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+1. Create react native project.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+   ```shell
+   npx react-native init (ProjectName)
+   ```
 
-```bash
-# using npm
-npm start
+2. Move to project folder.
 
-# OR using Yarn
-yarn start
-```
+   ```shell
+   cd (ProjectName)
+   ```
 
-## Step 2: Start your Application
+3. Create the necessary files and folders.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+   ```shell
+   mkdir src
+   mkdir public
+   touch public/index.html
+   mv App.tsx src
+   mv app.json src
+   cp index.js src
+   mv index.js index.native.js
+   ```
 
-### For Android
+4. Install dependencies using npm or yarn.
 
-```bash
-# using npm
-npm run android
+   ```shell
+   npm install react-dom react-native-web
+   npm install -dev react-scripts
+   ```
 
-# OR using Yarn
-yarn android
-```
+   or
 
-### For iOS
+   ```
+   yarn add react-dom react-native-web
+   yarn add --dev react-scripts
+   ```
 
-```bash
-# using npm
-npm run ios
+5. Modify each file as follows.
 
-# OR using Yarn
-yarn ios
-```
+- `public/index.html`
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+  ```html
+  <!DOCTYPE html>
+  <html lang="ko">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>WebTest</title>
+    </head>
+    <body>
+      <div id="root"></div>
+    </body>
+  </html>
+  ```
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+- index.native.js
 
-## Step 3: Modifying your App
+  ```JavaScript
+  import {AppRegistry} from 'react-native';
+  import App from './src/App';
+  import {name as appName} from './src/app.json';
 
-Now that you have successfully run the app, let's modify it.
+  AppRegistry.registerComponent(appName, () => App);
+  ```
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+- src/index.js
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+  ```JavaScript
+  import {AppRegistry} from 'react-native';
+  import App from './App';
 
-## Congratulations! :tada:
+  AppRegistry.registerComponent('App', () => App);
+  AppRegistry.runApplication('App', {rootTag: document.getElementById('root')});
+  ```
 
-You've successfully run and modified your React Native App. :partying_face:
+- src/App.tsx
 
-### Now what?
+  ```TypeScript
+  import React from 'react';
+  import {SafeAreaView, StatusBar, Text, View} from 'react-native';
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+  const App = () => {
+  return (
+     <SafeAreaView>
+        <StatusBar />
+        <View>
+        <Text style={{fontSize: 24}}>Hello World!!</Text>
+        </View>
+     </SafeAreaView>
+  );
+  };
 
-# Troubleshooting
+  export default App;
+  ```
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+6. Edit `package.json` and add the following line to the scripts section.
 
-# Learn More
+   ```json
+   "web": "react-scripts start"
+   ```
 
-To learn more about React Native, take a look at the following resources:
+7. Run apllication on all platforms using npm or yarn.
+   ```Shell
+   npm run ios && npm run android && npm run web
+   ```
+   or
+   ```Shell
+   yarn ios && yarn android && yarn web
+   ```
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+# Result
