@@ -1,4 +1,4 @@
-# Intro
+# What is it?
 
 After looking at the reference materials below, I tested the construction of an environment that develops iOS, Android and Web simultaneously using react-native-cli.
 
@@ -69,7 +69,7 @@ Reference : https://retool.com/blog/how-to-make-your-react-native-apps-work-on-t
   </html>
   ```
 
-- index.native.js
+- `index.native.js`
 
   ```JavaScript
   import {AppRegistry} from 'react-native';
@@ -79,7 +79,7 @@ Reference : https://retool.com/blog/how-to-make-your-react-native-apps-work-on-t
   AppRegistry.registerComponent(appName, () => App);
   ```
 
-- src/index.js
+- `src/index.js`
 
   ```JavaScript
   import {AppRegistry} from 'react-native';
@@ -89,7 +89,7 @@ Reference : https://retool.com/blog/how-to-make-your-react-native-apps-work-on-t
   AppRegistry.runApplication('App', {rootTag: document.getElementById('root')});
   ```
 
-- src/App.tsx
+- `src/App.tsx`
 
   ```TypeScript
   import React from 'react';
