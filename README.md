@@ -20,19 +20,25 @@ Reference : https://retool.com/blog/how-to-make-your-react-native-apps-work-on-t
 
 3. Create the necessary files and folders.
 
-   ```shell
+   ```
    mkdir src
+   
    mkdir public
+   
    touch public/index.html
+   
    mv App.tsx src
+   
    mv app.json src
+   
    cp index.js src
+   
    mv index.js index.native.js
    ```
 
 4. Install dependencies using npm or yarn.
 
-   ```shell
+   ```
    npm install react-dom react-native-web
    npm install -dev react-scripts
    ```
@@ -119,3 +125,6 @@ Reference : https://retool.com/blog/how-to-make-your-react-native-apps-work-on-t
    ```
 
 # Result
+
+![Result](https://github.com/Yuhyeon0516/ReactNative-Run-iOS_Android_Web-Test/assets/120432007/65a3f35b-302f-451e-8cef-27f4a24e3e6c)
+
